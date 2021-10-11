@@ -11,7 +11,8 @@ export default class PenDraw extends Component {
         y1: 30,
         x2: 180,
         y2: 70,
-        clearScreen: 0
+        clearScreen: 0,
+        chooseColor: 'black'
     }
     componentDidMount() {
         var cvs = document.getElementById("mycanvas")
@@ -62,10 +63,10 @@ export default class PenDraw extends Component {
         const canvas = document.getElementById("mycanvas")
         const ctx = canvas.getContext('2d')
         ctx.beginPath()
-        ctx.strokeStyle = this.props.lineColor;
+        ctx.strokeStyle = this.state.chooseColor;
         ctx.lineJoin = "round";
         ctx.lineCap = "round";
-        ctx.lineWidth = this.props.lineWidth;
+        ctx.lineWidth = '1';
         ctx.moveTo(p.x, p.y);
         ctx.lineTo(q.x, q.y);
         ctx.stroke();
@@ -82,23 +83,24 @@ export default class PenDraw extends Component {
             })
         }
     }
+
     render() {
-        const { style } = this.props
 
         return (
-            <div>
+            <div className="canvas-container">
+                <div>
+                    <label>Choose color:  </label>
+                    <input type='color' onChange={e => this.setState({ chooseColor: e.target.value })} />
+                </div>
                 <canvas
                     id="mycanvas"
                     width={"200px"}
                     height={"200px"}
-                    color={chooseColor}
                     style={{ border: '1px solid rgb(165, 146, 37)' }}
                     onMouseUp={this.onMouseUp}
                     onMouseDown={this.onMouseDown}
                     onMouseMove={this.onMouseMove}>
                 </canvas>
-                <label>Choose color</label>
-                <input type='color'/>
             </div>
         )
     }
