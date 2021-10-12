@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import './draw.css'
 
 export default class PenDraw extends Component {
 
@@ -14,11 +14,29 @@ export default class PenDraw extends Component {
         clearScreen: 0,
         chooseColor: 'black'
     }
+
     componentDidMount() {
         var cvs = document.getElementById("mycanvas")
         var ctx = cvs.getContext("2d");
         this.setState({ cvs, ctx })
         ctx.restore();
+        this.props.socket.on('pointsDrawToClient', (resMessage) => {
+                this.drowFromDiffrentCanvas(resMessage)            
+        })
+    }
+
+    drowFromDiffrentCanvas=(resMessage)=>{
+        const canvas = document.getElementById("mycanvas")
+            const context = canvas.getContext('2d')
+            context.beginPath()
+            context.strokeStyle = resMessage.color;
+            context.lineJoin = "round";
+            context.lineCap = "round";
+            context.lineWidth = '1';
+            context.moveTo(resMessage.x1, resMessage.y1);
+            context.lineTo(resMessage.x2, resMessage.y2);
+            context.stroke();
+            console.log('resMessage',resMessage)
     }
 
     UNSAFE_componentWillReceiveProps(nextProps) {
@@ -47,7 +65,6 @@ export default class PenDraw extends Component {
     }
     onMouseUp = (e) => {
         this.setState({ mouse: 0 })
-        debugger
         const canvas = document.getElementById("mycanvas")
         const context = canvas.getContext('2d')
     }
@@ -70,6 +87,7 @@ export default class PenDraw extends Component {
         ctx.moveTo(p.x, p.y);
         ctx.lineTo(q.x, q.y);
         ctx.stroke();
+        this.props.socket.emit('sendPointsDraw', {x1:p.x ,y1:p.y, x2:q.x, y2:q.y, color:this.state.chooseColor})
     }
     onMouseMove = (e) => {
         var { x1, y1, mouse } = this.state
@@ -77,10 +95,7 @@ export default class PenDraw extends Component {
             var p = this.getMousePos(e)
             this.setState({ x2: p.x, y2: p.y })
             this.drawLine({ x: x1, y: y1 }, p)
-            this.setState({
-                x1: p.x,
-                y1: p.y
-            })
+            this.setState({ x1: p.x, y1: p.y })
         }
     }
 

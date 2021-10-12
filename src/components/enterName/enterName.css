@@ -1,0 +1,21 @@
+.enter-name-container{
+    display: flex;
+    flex-direction: column;
+    margin-left: 5%;
+    margin-top: 2rem;
+}
+.enter-name-container input{
+    border:none;
+    border-bottom: 1px solid black;
+}
+.enter-name-container a{
+    width: 7rem;
+    text-align: center;
+    font-family: cursive;
+    border-radius: 4px;
+    margin-top: 1rem;
+    text-decoration: none;
+    color: white;
+    background-color: rgb(165, 146, 37);
+    border: none;
+}
