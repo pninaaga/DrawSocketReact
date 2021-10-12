@@ -60,7 +60,6 @@ export default class PenDraw extends Component {
         ctx.lineTo(0, 0)
         ctx.stroke()
         ctx.restore()
-        // this.props.socket.emit('sendClearCanvas')
     }
     onMouseUp = (e) => {
         this.setState({ mouse: 0 })
