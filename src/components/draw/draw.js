@@ -20,6 +20,11 @@ export default class PenDraw extends Component {
         var ctx = cvs.getContext("2d");
         this.setState({ cvs, ctx })
         ctx.restore();
+        debugger
+        if(this.props.arrPointsDraw!='-1')
+        this.props.arrPointsDraw.map(item=>{
+            this.drowFromDiffrentCanvas(item)
+        })
         this.props.socket.on('pointsDrawToClient', (resMessage) => {
             this.drowFromDiffrentCanvas(resMessage)
         })
