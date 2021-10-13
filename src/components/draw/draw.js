@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { connect } from 'react-redux';
 import { addPointToArr, addManyPointToArr } from '../../redux/actions/draw'
+import $ from 'jquery'
 import './draw.css'
 
 function mapStateToProps(state) {
@@ -26,6 +27,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         const [y2, setY2] = useState(70)
         const [chooseColor, setChooseColor] = useState('black')
         const [point, setPoint] = useState([])
+        const [arrFilter, setArrFilter] = useState([])
         const { socket, arrPointsDraw, chooseDeleteLine, firstName, nameDrawToDelete } = props
         const isInitialMount = useRef(true);
 
@@ -55,7 +57,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                 isInitialMount.current = false;
             }
             else {
-                let arrFilter = allPoints.filter(p => p.firstName != nameDrawToDelete.map(item=>item))
+                let arrFilter = allPoints.filter(p => p.firstName != nameDrawToDelete.map(item => item))
                 if (arrFilter != '-1') {
                     clearCanvas()
                     arrFilter.map(item => { drowFromDiffrentCanvas(item) })
@@ -91,6 +93,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
             ctx.lineTo(0, 0)
             ctx.stroke()
             ctx.restore()
+            $('#range').val('1')
         }
 
         function onMouseUp(e) {
@@ -150,6 +153,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                         onMouseMove={onMouseMove}>
                     </canvas>
                     <button onClick={clearCanvas}>Clear</button>
+                    <input type="range" id="range" onChange={e => drowFromDiffrentCanvas(allPoints[Number(e.target.value)])} min="1" max={allPoints.length - 1} step="1" />
                 </div>
             </>
         )

@@ -10,7 +10,7 @@ export default function EnterName(props) {
 
     useEffect(() => {
         socket.on('connect', () => {
-            console.log(socket)})
+            console.log(socket) })
     }, [])
 
     function saveName() {
