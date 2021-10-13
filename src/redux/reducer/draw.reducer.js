@@ -12,7 +12,7 @@ export default produce((state = initialState, action) => {
             state.allPoints = state.allPoints.concat(action.payload)
             return state
         case 'AAD_MANY_POINT_TO_ARR':
-            state.allPoints = [...action.payload]
+            state.allPoints = [...state.allPoints,...action.payload]
             return state
         default:
             return state

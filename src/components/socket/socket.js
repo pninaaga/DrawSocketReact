@@ -27,12 +27,10 @@ export default connect(null, mapDispatchToProps)(
                 setArrPointsDrawing(dataStart.setArrPoints)
                 setStartAllPoints(dataStart.setArrPoints)
                 setArrNames(dataStart.arrNames)
-                console.log('arrPointsDraw', dataStart);
             })
         }, [])
 
         function deleteDrawForName(name) {
-            debugger
             if ($(`#${name}`).hasClass('active')) {
                 $(`#${name}`).removeClass('active')
                 setNamesDrawToDelete(namesDrawToDelete.filter(n => n != name))

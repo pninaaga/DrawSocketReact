@@ -1,5 +1,4 @@
 export function setStartAllPoints(value) {
-    debugger
     return {
         type: 'SET_START_ALL_POINTS',
         payload: value
