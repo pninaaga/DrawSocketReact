@@ -55,7 +55,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                 isInitialMount.current = false;
             }
             else {
-                let arrFilter = allPoints.filter(p => p.firstName != nameDrawToDelete[0])
+                let arrFilter = allPoints.filter(p => p.firstName != nameDrawToDelete.map(item=>item))
                 if (arrFilter != '-1') {
                     clearCanvas()
                     arrFilter.map(item => { drowFromDiffrentCanvas(item) })
