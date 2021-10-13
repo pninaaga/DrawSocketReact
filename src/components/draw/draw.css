@@ -6,6 +6,9 @@
   width: 200px;
   height: 200px;
 }
+#mycanvas{
+  border: 1px solid rgb(165, 146, 37);
+}
 .canvas-container input{
   margin-bottom: 7px;
 }

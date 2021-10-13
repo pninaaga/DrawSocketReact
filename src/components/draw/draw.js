@@ -24,7 +24,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         const [y1, setY1] = useState(30)
         const [x2, setX2] = useState(180)
         const [y2, setY2] = useState(70)
-        const [clearScreen, setClearScreen] = useState(0)
         const [chooseColor, setChooseColor] = useState('black')
         const [point, setPoint] = useState([])
         const { socket, arrPointsDraw, chooseDeleteLine, firstName, nameDrawToDelete } = props
@@ -146,7 +145,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                         id="mycanvas"
                         width={"200px"}
                         height={"200px"}
-                        style={{ border: '1px solid rgb(165, 146, 37)' }}
                         onMouseUp={onMouseUp}
                         onMouseDown={onMouseDown}
                         onMouseMove={onMouseMove}>
