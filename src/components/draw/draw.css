@@ -9,3 +9,14 @@
 .canvas-container input{
   margin-bottom: 7px;
 }
+.first-name-title{
+  position: absolute;
+  top: 0;
+  font-size: 15px;
+  padding: 5px 0;
+  font-family: cursive;
+  right: 0;
+  width: 100%;
+  text-align: center;
+  background-color: #f9f4e0;
+}

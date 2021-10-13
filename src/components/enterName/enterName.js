@@ -1,27 +1,30 @@
-import React, { useEffect } from 'react'
-import socketIoClient from 'socket.io-client'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
 import './enterName.css'
+import { useHistory } from 'react-router-dom'
 
-const ENDPOINT = 'http://localhost:3000/'
+export default function EnterName(props) {
 
-export default function EnterName() {
-
-    const socket = socketIoClient(ENDPOINT)
+    const { socket } = props
+    const [firstName, setFirstName] = useState()
+    const history = useHistory()
 
     useEffect(() => {
         socket.on('connect', () => {
-            console.log(socket);
-        })
+            console.log(socket)})
     }, [])
+
+    function saveName() {
+        socket.emit('sendName', firstName)
+        history.push({ pathname: `/draw/${firstName}` })
+    }
 
     return (
         <div className="enter-name-container">
             <div>
                 <label>Enter your name: </label>
-                <input type='text' />
+                <input type='text' onChange={e => { setFirstName(e.target.value) }} />
             </div>
-            <Link to={{ pathname: '/draw' }}>Let's start</Link>
+            <button onClick={saveName}>Let's start</button>
         </div>
     )
 }

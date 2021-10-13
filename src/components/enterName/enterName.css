@@ -8,7 +8,7 @@
     border:none;
     border-bottom: 1px solid black;
 }
-.enter-name-container a{
+.enter-name-container button{
     width: 7rem;
     text-align: center;
     font-family: cursive;
