@@ -4,7 +4,7 @@ import EnterName from '../src/components/enterName/enterName'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import socketIoClient from 'socket.io-client'
 
-const ENDPOINT = 'http://localhost:3000/'
+const ENDPOINT = 'http://localhost:8080/'
 
 function App() {
 
