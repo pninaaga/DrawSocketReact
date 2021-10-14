@@ -27,7 +27,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         const [y2, setY2] = useState(70)
         const [chooseColor, setChooseColor] = useState('black')
         const [point, setPoint] = useState([])
-        const [arrFilter, setArrFilter] = useState([])
         const { socket, arrPointsDraw, chooseDeleteLine, firstName, nameDrawToDelete } = props
         const isInitialMount = useRef(true);
 
@@ -57,8 +56,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                 isInitialMount.current = false;
             }
             else {
-                let arrFilter = allPoints.filter(p => p.firstName != nameDrawToDelete.map(item => item))
-                if (arrFilter != '-1') {
+                let arrFilter = []
+                allPoints.map(p => {
+                    const temp1 = nameDrawToDelete.filter(i => i == p.firstName)
+                    if (temp1.length <= 0) {
+                        arrFilter.push(p)
+                    }
+                })
+                if (arrFilter != []) {
                     clearCanvas()
                     arrFilter.map(item => { drowFromDiffrentCanvas(item) })
                 }
